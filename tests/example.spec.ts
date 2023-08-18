@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test("has title", async ({ page, request }) => {
-  const response = await request.post("http://127.0.0.1:8080/v3/user", {
+  const response = await request.post("http://0.0.0.0:80/v3/user", {
     data: {
       firstName: "Maks",
       lastName: "lastName",
@@ -16,5 +16,6 @@ test("has title", async ({ page, request }) => {
 
   // Expect a title "to contain" a substring.
   await expect(response).toBeOK();
-  console.log(await response.json());
+  const resp = await response;
+  console.log(response);
 });
