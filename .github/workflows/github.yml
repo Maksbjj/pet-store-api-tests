@@ -11,10 +11,9 @@ jobs:
         run: docker pull openapitools/openapi-petstore
       - name: run docker container
         run:
-          docker run -d -e OPENAPI_BASE_PATH=/v3 --name petstore -p HOSTPORT:CONTAINER_PORT openapitools/openapi-petstore
-          echo "APP_URL=http://${{ needs.run-app.outputs.HOST }}:${{ needs.run-app.outputs.PORT }}" >> $GITHUB_ENV
-    env:
-      HOST_PORT: 8080
+          docker run -d -e OPENAPI_BASE_PATH=/v3 --name petstore -p 8080:CONTAINER_PORT openapitools/openapi-petstore
+          echo "APP_URL=http://${{ needs.run-app.outputs.HOST }}:8080" >> $GITHUB_ENV
+
 
   test:
     timeout-minutes: 360
