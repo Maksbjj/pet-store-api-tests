@@ -7,10 +7,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Run Docker container
-        run: |
-          docker pull openapitools/openapi-petstore
-          docker run -d -e OPENAPI_BASE_PATH=/v3 --name petstore -p 80:8080 openapitools/openapi-petstore
+      - name: pull docker container
+        run: docker pull openapitools/openapi-petstore
+      - name: run docker container
+        run: docker run -d -e OPENAPI_BASE_PATH=/v3 --name petstore -p 80:8080 openapitools/openapi-petstore
 
   test:
     needs: run-docker-container
