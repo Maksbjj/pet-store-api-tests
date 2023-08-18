@@ -8,6 +8,7 @@ jobs:
     steps:
       - name: deploy1
         run: |
+          ls 
           cd ./swagger-petstore
           maven package
       - uses: s4u/setup-maven-action@v1.8.0
