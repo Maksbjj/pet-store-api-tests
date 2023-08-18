@@ -3,34 +3,37 @@ name: pet-store-api-tests
 on: push
 
 jobs:
-  run-docker-container:
+  build-app:
     runs-on: ubuntu-latest
-
     steps:
-      - name: pull docker container
-        run: docker pull openapitools/openapi-petstore
-      - name: run docker container
+      - uses: s4u/setup-maven-action@v1.8.0
+      - name: deploy
         run: |
-          docker run -d -e OPENAPI_BASE_PATH=/v3 --name petstore -p 80:8080 openapitools/openapi-petstore
-          docker ps
+          cd swagger-petstore
+          maven package
+      - uses: actions/setup-node@v3
+      - name: deploy
+        run: npm i -g @railway/cli
+      - name: run
+        run: RAILWAY_TOKEN=TOKEN railway up
 
       - name: wait
         run: sleep 30s
         shell: bash
-  
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      - name: Install dependencies
-        run: npm ci
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-      - name: Run Playwright tests
-        run: npx playwright test
-      - uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
+
+      # - uses: actions/checkout@v3
+      # - uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 18
+      # - name: Install dependencies
+      #   run: npm ci
+      # - name: Install Playwright Browsers
+      #   run: npx playwright install --with-deps
+      # - name: Run Playwright tests
+      #   run: npx playwright test
+      # - uses: actions/upload-artifact@v3
+      #   if: always()
+      #   with:
+      #     name: playwright-report
+      #     path: playwright-report/
+      #     retention-days: 30
