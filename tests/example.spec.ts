@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test("has title", async ({ page, request }) => {
-  const response = await request.post("http://127.0.0.1:8080/v3/user", {
+  const response = await request.post("http://localhost/v3/user", {
     data: {
       firstName: "Maks",
       lastName: "lastName",
