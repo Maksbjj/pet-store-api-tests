@@ -14,20 +14,14 @@ jobs:
           docker run -d -e OPENAPI_BASE_PATH=/v3 --name petstore -p 80:8080 openapitools/openapi-petstore
           docker ps
 
-  test:
-    timeout-minutes: 360
-    needs: run-docker-container
-    runs-on: ubuntu-latest
-    steps:
       - name: wait
         run: sleep 30s
         shell: bash
+  
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: doc
-        run: docker ps
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
