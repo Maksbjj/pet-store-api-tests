@@ -6,14 +6,14 @@ jobs:
   build-app:
     runs-on: ubuntu-latest
     steps:
-      - uses: s4u/setup-maven-action@v1.8.0
-      - name: deploy
+      - name: deploy1
         run: |
           cd swagger-petstore
           maven package
-      - uses: actions/setup-node@v3
-      - name: deploy
+      - uses: s4u/setup-maven-action@v1.8.0
+      - name: deploy2
         run: npm i -g @railway/cli
+      - uses: actions/setup-node@v3
       - name: run
         run: RAILWAY_TOKEN=TOKEN railway up
 
