@@ -1,22 +1,16 @@
 import { test, expect } from "@playwright/test";
 
 test("has title", async ({ page, request }) => {
-  const response = await request.post("http://localhost:8080/api/v3/pet", {
+  const response = await request.post("http://localhost/v3/user", {
     data: {
-      id: 10,
-      name: "doggie",
-      category: {
-        id: 1,
-        name: "Dogs",
-      },
-      photoUrls: ["string"],
-      tags: [
-        {
-          id: 0,
-          name: "string",
-        },
-      ],
-      status: "available",
+      firstName: "Maks",
+      lastName: "lastName",
+      password: "password",
+      userStatus: 6,
+      phone: "phone",
+      id: 2,
+      email: "email",
+      username: "username",
     },
   });
 
