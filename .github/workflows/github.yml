@@ -7,10 +7,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # - uses: actions/checkout@v3
+      # - uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 18
+
       - name: install dependencies
         run: npm ci
-      - uses: actions/setup-node@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
         with:
           node-version: 18
 
@@ -25,7 +29,7 @@ jobs:
         run: sleep 30s
         shell: bash
 
-      - name: run api tests
+      - name: run api
         run: npx playwright test
       - uses: actions/upload-artifact@v3
         if: always()
