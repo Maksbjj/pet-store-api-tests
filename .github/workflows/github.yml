@@ -11,7 +11,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: Install dependencies
+
+      - name: install dependencies
         run: npm ci
 
       - name: pull docker image
@@ -24,9 +25,8 @@ jobs:
       - name: wait until app is ready
         run: sleep 30s
         shell: bash
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-      - name: Run Playwright tests
+
+      - name: run playwright tests
         run: npx playwright test
       - uses: actions/upload-artifact@v3
         if: always()
